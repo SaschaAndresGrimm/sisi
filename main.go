@@ -112,20 +112,22 @@ func print(resp resty.Response, err error) {
 	}
 
 	//print dict and list entries
-	if resp.StatusCode() >= 200 && resp.StatusCode() < 300 && len(resp.String()) > 1 {
-		s := resp.String()
-		s = s[1 : len(s)-1]
-		for _, val := range strings.Split(s, ",") {
-			fmt.Println(" ", val)
+	if resp.StatusCode() >= 200 && resp.StatusCode() < 300 {
+		if len(resp.String()) > 2 {
+			s := resp.String()
+			s = s[1 : len(s)-1]
+			for _, val := range strings.Split(s, ",") {
+				fmt.Println(" ", val)
+			}
 		}
-	} else {
+	} else if resp.StatusCode() != 404 {
 		fmt.Println(resp.String())
 	}
 }
 
 func main() {
 	usage := `sisi -- Simple SIMPLON API CLI
-	by SasG
+	Tell Sisi if she should get, set, or do anything for you. Be friendly and say 'please'.
 
 	Usage:
 	sisi <ip> get <module> <param> <key> [-a <api> -t <timeout> please]
@@ -137,7 +139,7 @@ func main() {
 	-a <api>      API version [default: 1.8.0]
 	-t <timeout>  request timeout in seconds [default: 2]
 	-h --help     Show this help screen.
-	please      just being friendly, optionally `
+	please        just being friendly, optionally `
 
 	args, _ := docopt.ParseDoc(usage)
 	timeout, _ := args.Int("-t")

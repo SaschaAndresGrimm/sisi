@@ -2,10 +2,7 @@
 # source: https://www.digitalocean.com/community/tutorials/how-to-build-go-executables-for-multiple-platforms-on-ubuntu-16-04
 
 platforms=("linux/amd64" "linux/386" "windows/386" "darwin/amd64")
-
 package="cmd/main/main.go"
-
-package_split=(${package//\// })
 package_name="sisi"
 	
 for platform in "${platforms[@]}"

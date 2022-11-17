@@ -47,7 +47,6 @@ func (c client) Get(module, param, key string) (resty.Response, error) {
 	resp, err := c.client.R().
 		Get(c.url(module, param, key))
 
-	print(*resp, err)
 	return *resp, err
 }
 
@@ -57,6 +56,8 @@ func (c client) Set(module, param, key, value string) (resty.Response, error) {
 
 	if isNumeric(value) {
 		body = fmt.Sprintf("{\"value\":%s}", value)
+	} else if v, err := strconv.ParseBool(value); err == nil {
+		body = fmt.Sprintf("{\"value\":%v}", v)
 	} else {
 		body = fmt.Sprintf("{\"value\":\"%s\"}", value)
 	}
@@ -65,8 +66,6 @@ func (c client) Set(module, param, key, value string) (resty.Response, error) {
 		SetBody(body).
 		Put(c.url(module, param, key))
 
-	print(*resp, err)
-
 	return *resp, err
 }
 
@@ -74,8 +73,6 @@ func (c client) Do(module, task string) (resty.Response, error) {
 	// put request for command ressource
 	resp, err := c.client.R().
 		Put(c.url(module, "command", task))
-
-	print(*resp, err)
 
 	return *resp, err
 }
@@ -86,7 +83,7 @@ func isNumeric(s string) bool {
 	return err == nil
 }
 
-func print(resp resty.Response, err error) {
+func (c client) Print(resp resty.Response, err error) {
 	//pretty printing of SIMPLON API replies
 
 	if resp.Request.Body != nil {

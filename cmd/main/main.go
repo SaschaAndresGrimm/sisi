@@ -32,21 +32,27 @@ func main() {
 		timeout)
 
 	if args["get"] == true {
-		c.Get(args["<module>"].(string),
+		resp, err := c.Get(args["<module>"].(string),
 			args["<param>"].(string),
 			args["<key>"].(string))
 
+		c.Print(resp, err)
+
 	} else if args["set"] == true {
-		c.Set(args["<module>"].(string),
+		resp, err := c.Set(args["<module>"].(string),
 			args["<param>"].(string),
 			args["<key>"].(string),
 			args["<value>"].(string),
 		)
 
+		c.Print(resp, err)
+
 	} else if args["do"] == true {
-		c.Do(args["<module>"].(string),
+		resp, err := c.Do(args["<module>"].(string),
 			args["<task>"].(string),
 		)
+
+		c.Print(resp, err)
 
 	} else {
 		fmt.Println(usage)

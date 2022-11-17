@@ -1,5 +1,5 @@
 # Sisi
-**Si**mple **SI**mplon API CLI
+**Si**mple **SI**MPLON API client
 
 ## Motivation
 DECTRIS EIGER(2) detectors are controlled via a rest-like API ([SIMPLON API](https://media.dectris.com/210607-DECTRIS-SIMPLON-API-Manual_EIGER2-chip-based_detectros.pdf)). _Sisi_ provides a simple CLI tool written in golang that can be [cross-compiled](./build.sh) and used as standalone executable on different platforms:
@@ -7,6 +7,7 @@ DECTRIS EIGER(2) detectors are controlled via a rest-like API ([SIMPLON API](htt
 * [Linux](./bin/sisi-linux-386)
 * [Windows](./bin/sisi-windows-386.exe)
 * [OSX](./bin/sisi-darwin-amd64)
+
 
 ### Real motivation
 I have a terribly hard time remembering CURL commands... See the examples for comparison. 
@@ -55,7 +56,7 @@ You're weclome!
 the same in CURL
 ```
 curl -X PUT -H "Content-Type: application/json" -d "{\"value\":5}"
-http://169.254.254.1/detector/api/1.6.0/config/count_time
+http://169.254.254.1/detector/api/1.6.0/config/nimages
 ```
 
 **arm detector**

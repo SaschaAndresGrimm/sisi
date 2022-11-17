@@ -20,7 +20,7 @@ func main() {
 
 	Options:
 	-a <api>      API version [default: 1.8.0]
-	-t <timeout>  request timeout in seconds [default: 2]
+	-t <timeout>  request timeout in seconds [default: 5]
 	-h --help     Show this help screen.
 	please        just being friendly, optionally `
 

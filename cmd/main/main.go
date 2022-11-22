@@ -13,12 +13,13 @@ func main() {
 	Tell Sisi if she should get, set, or do anything for you. Be friendly and say 'please'.
 
 	Usage:
-	sisi <ip> get <module> <param> <key> [-a <api> -t <timeout> please]
-	sisi <ip> set <module> <param> <key> <value> [-a <api> -t <timeout> please]
-	sisi <ip> do <module> <task> [-a <api> -t <timeout> please]
+	sisi <ip> get <module> <param> <key> [-a <api> -t <timeout> please -p <port>]
+	sisi <ip> set <module> <param> <key> <value> [-a <api> -t <timeout> please -p <port>]
+	sisi <ip> do <module> <task> [-a <api> -t <timeout> please -p <port>]
 	sisi -h | --help
 
 	Options:
+	-p <port>	  API port [default: 80]
 	-a <api>      API version [default: 1.8.0]
 	-t <timeout>  request timeout in seconds [default: 5]
 	-h --help     Show this help screen.
@@ -26,8 +27,11 @@ func main() {
 
 	args, _ := docopt.ParseDoc(usage)
 	timeout, _ := args.Int("-t")
+	port, _ := args.Int("-p")
 
-	c := utils.NewClient(args["<ip>"].(string),
+	c := utils.NewClient(
+		args["<ip>"].(string),
+		port,
 		args["-a"].(string),
 		timeout)
 

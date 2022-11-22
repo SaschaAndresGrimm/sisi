@@ -13,19 +13,20 @@ DECTRIS EIGER(2) detectors are controlled via a rest-like API ([SIMPLON API](htt
 I have a terribly hard time remembering CURL commands... See the examples for comparison. 
 
 ## Usage
-Tell Sisi if she should _get_, _set_, or _do_ anything for you. Be friendly and say 'please'.
+	Tell Sisi if she should get, set, or do anything for you. Be friendly and say 'please'.
 
 	Usage:
-	sisi <ip> get <module> <param> <key> [-a <api> -t <timeout> please]
-	sisi <ip> set <module> <param> <key> <value> [-a <api> -t <timeout> please]
-	sisi <ip> do <module> <task> [-a <api> -t <timeout> please]
+	sisi <ip> get <module> <param> <key> [-a <api> -t <timeout> please -p <port>]
+	sisi <ip> set <module> <param> <key> <value> [-a <api> -t <timeout> please -p <port>]
+	sisi <ip> do <module> <task> [-a <api> -t <timeout> please -p <port>]
 	sisi -h | --help
 
 	Options:
+	-p <port>	  API port [default: 80]
 	-a <api>      API version [default: 1.8.0]
-	-t <timeout>  request timeout in seconds [default: 2]
+	-t <timeout>  request timeout in seconds [default: 5]
 	-h --help     Show this help screen.
-	please        just being friendly, optionally
+	please        just being friendly, optionally `
 
 ### Examples
 **enable the filewriter interface**

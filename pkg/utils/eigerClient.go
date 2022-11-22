@@ -11,15 +11,16 @@ import (
 
 type client struct {
 	//client struct to access SIMPLON rest-like API
-	ip, api string
-	timeout int
-	client  *resty.Client
+	ip, api       string
+	port, timeout int
+	client        *resty.Client
 }
 
-func NewClient(ip, api string, timeout int) *client {
+func NewClient(ip string, port int, api string, timeout int) *client {
 	//constructor returning a Client struct to interact with SIMPLON rest-like API
 	c := new(client)
 	c.ip = ip
+	c.port = port
 	c.api = api
 	c.timeout = timeout
 
@@ -32,8 +33,9 @@ func NewClient(ip, api string, timeout int) *client {
 
 func (c client) url(module, param, key string) string {
 	//return API url
-	url := fmt.Sprintf("http://%s/%s/api/%s/%s/%s",
+	url := fmt.Sprintf("http://%s:%d/%s/api/%s/%s/%s",
 		c.ip,
+		c.port,
 		module,
 		c.api,
 		param,
